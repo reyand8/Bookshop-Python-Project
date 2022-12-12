@@ -5,6 +5,11 @@ name = "pypi"
 
 [packages]
 django = "*"
+pillow = "*"
+pytest = "*"
+coverage = "*"
+faker = "*"
+factory-boy = "*"
 
 [dev-packages]
 
