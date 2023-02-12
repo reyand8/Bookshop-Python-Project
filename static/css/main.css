@@ -1,0 +1,57 @@
+.base_button{
+    margin-left: 10px;
+}
+
+.home_block_background {
+    background: url('../media/new.jpg') no-repeat center;
+    background-size: 1200px 600px;
+}
+
+.home_block_info{
+    background: rgba(197, 197, 197, 0.88);
+    border-radius: 14px;
+    padding: 10px;
+}
+
+.img-fluid {
+    height: 200px!important;
+}
+
+.home_block_details{
+    margin: 5px auto 5px auto;
+}
+
+.home__btn_details{
+    padding-left: 26px;
+    padding-right: 26px;
+}
+
+.home_block_wishlist{
+    margin: 5px auto 15px auto;
+}
+
+.home_block_product{
+    margin: 10px auto;
+}
+
+.home_block_main_product{
+    height: 360px;
+}
+
+.container-fluid {
+        max-width: 100%;
+}
+
+.account-form input {
+    border: 2px solid #ccc;
+    height: calc(2em + .75rem + 2px);
+}
+
+.account-form input:focus {
+    border-color: #1497ff;
+    box-shadow: none;
+}
+
+.imges{
+    width: 200px;
+    height: 320px}

@@ -1,13 +1,14 @@
-import factory
-from faker import Faker
+from django.contrib.auth.models import User
 from shop.models import *
+from faker import Faker
+import factory
 fake = Faker()
 
 
 class UserFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = User
-    username = fake.name()
+    name = fake.name()
 
 
 class CategoryFactory(factory.django.DjangoModelFactory):

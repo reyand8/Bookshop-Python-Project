@@ -3,49 +3,53 @@
 {% block title %}Home{% endblock %}
 {% block content %}
 <main>
-
-  <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="h1 fw-bold">Search, Read, Buy, Review</h1>
-        <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator,
-          etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+  <section class="home_block_background py-3 text-center container">
+    <div class="row py-lg-2  ">
+      <div class="home_block_info col-lg-4 col-md-6 mx-auto">
+        <h1 class="h1 fw-bold">Search, Buy, Read!</h1>
+        <p class="lead fw-muted">Here you can find and buy a lot of different books. Some books have a special discount.
+          <br>Try to find a book just now!</p>
         <p>
-          <a href="#" class="btn btn-primary my-2">Make an account</a>
+          <a href="{% url 'account:registration' %}" class="btn btn-primary my-2">Make an account</a>
         </p>
       </div>
     </div>
   </section>
-
-  <div class="album py-5 bg-light">
+  <div class="album py-5">
     <div class="container">
-
       <div class="pb-3 h5">All Books</div>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
-
         {% for product in products %}
-
-        <div class="col">
-          <div class="card shadow-sm">
-            <img class="img-fluid" alt="Responsive image" src="{{ product.image.url }}">
-            <div class="card-body">
-              <p class="card-text">
-                <a class="text-dark text-decoration-none" href="{{ product.get_absolute_url }}">{{ product.title }}</a>
-              </p>
-              <div class="d-flex justify-content-between align-items-center">
-                <small class="text-muted">9min read</small>
+          <div class="col">
+            <a class="text-dark text-decoration-none home_block_product" href="{{ product.get_absolute_url }}">
+              <div class="card shadow-sm home_block_main_product">
+                {% for image in product.product_image.all %}
+                  {% if image.is_feature%}
+                    <img class="img-fluid" alt="Responsive image" src="{{ image.image.url }}">
+                  {% else %}
+                    <img class="img-fluid" alt="Default image" src="../../static/media/default_image.png">
+                  {% endif %}
+                {% endfor %}
+                <div class="card-body">
+                  <p class="card-text">
+                   {{ product.title }}
+                  </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <small class="text-muted">Price: {{product.regular_price}}€</small>
+                  </div>
+                </div>
+                <div class="home_block_details">
+                    <a href="{{ product.get_absolute_url }}" class="btn btn-outline-dark">More Details</a>
+                </div>
+                <div class="home_block_wishlist">
+                    <a href="{% url 'account:user_wishlist' product.id  %}" class="btn btn-light fw900" role="button" aria-disabled="true">Add to Wish List</a>
+                </div>
               </div>
-            </div>
+            </a>
           </div>
-        </div>
-
         {% endfor %}
-
       </div>
     </div>
   </div>
-
-
 </main>
 {% endblock %}
-

@@ -1,6 +1,5 @@
-import os.path
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -14,9 +13,13 @@ SECRET_KEY = 'django-insecure-3ebewv5i)oaa5n-0=(exi(&08jdnpq!37uy=8v(p7#daky#b70
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost',
+                 '127.0.0.1',
+                 ]
 
-
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 # Application definition
 
 INSTALLED_APPS = [
@@ -27,6 +30,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'shop',
+    'basket',
+    'orders',
+    'account',
+    'payment',
+    'mptt',
+    'debug_toolbar',
+
 ]
 
 MIDDLEWARE = [
@@ -37,6 +47,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -52,7 +63,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'shop.views.categories'
+                'shop.context_processors.categories',
+                'basket.context_processors.basket',
             ],
         },
     },
@@ -102,16 +114,27 @@ USE_I18N = True
 
 USE_TZ = True
 
+STATIC_URL = '/static/'
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.0/howto/static-files/
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-STATIC_URL = 'static/'
-
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'static')
-# ]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static")
+]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+# Basket session ID
+BASKET_SESSION_ID = 'basket'
+
+# Custom user model
+AUTH_USER_MODEL = 'account.Customer'
+LOGIN_REDIRECT_URL = '/account/dashboard'
+LOGIN_URL = '/account/login/'
+
+# Email setting
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+PUBLISHABLE_KEY = 'pk_test_51MNy9DBriNtzeXwItyDYJzRSOuNmE7XvZBwt8HBGhGnipJjjhvO6l9MmnKIi4iiHioZW496k3BRlPiwH93E3AcZT00sFtWVKuL'
+SECRET_KEY = 'sk_test_51MNy9DBriNtzeXwIuk761UjVemMzVczRCYyuASTz4ThHpTA1kIdZTxfLLGRn3M7vW4hyX52ZrDrGt9NYsOS1WJOY00suMB5N70'
+STRIPE_ENDPOINT_SECRET = 'whsec_33e6f8ddd25dc12b3be15276f1f98adf95722b1caa7cbd943db56770a8be3945'
+
